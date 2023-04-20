@@ -112,7 +112,7 @@
 						addCounter: 5,
 						autoGenDesc: true,
 						dateDiff: 3 * 60,
-						displayDateTimeFormat: 'YYYY-MM-DD HH:mm:ss',
+						displayDateTimeFormat: 'YYYY-MM-DD HH:mm',
 
 						entries: [],
 						fields: [
@@ -144,14 +144,14 @@
 							{
 								name: 'From',
 								field: 'fromDateTime',
-								placeholder: '2023-01-31 19:30:00',
+								placeholder: '2023-01-31 19:30',
 								classes: 'fw-bold bg-success',
 								changedEvent: function (i) { }
 							},
 							{
 								name: 'To',
 								field: 'toDateTime',
-								placeholder: '2023-12-31 22:30:',
+								placeholder: '2023-12-31 22:30',
 								classes: 'fw-bold bg-success',
 								changedEvent: function (i) { }
 							},
@@ -216,7 +216,7 @@
 								let val = ent.value;
 								if (ent.field.includes("DateTime")) {
 									let momentObject = moment(val, self.displayDateTimeFormat);
-									val = momentObject.format('YYYYMMDDTHHmmss');
+									val = momentObject.format('YYYYMMDDTHHmm');
 								}
 								fieldValMap[ent.field] = val ? val.trim() : '';
 							});
@@ -225,8 +225,8 @@
 								content += 'BEGIN:VEVENT\r\n';
 								content += 'SUMMARY:' + fieldValMap.summary + '\r\n';
 								content += 'DESCRIPTION:' + fieldValMap.description + '\r\n';
-								content += `DTSTART:${fieldValMap.fromDateTime}\r\n`;
-								content += `DTEND:${fieldValMap.toDateTime}\r\n`;
+								content += `DTSTART:${fieldValMap.fromDateTime}00\r\n`;
+								content += `DTEND:${fieldValMap.toDateTime}00\r\n`;
 								content += 'END:VEVENT\r\n';
 								hasContent = true;
 							}
